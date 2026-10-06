@@ -162,6 +162,14 @@ button span {
   box-shadow: 0 24px 70px rgba(29, 42, 61, 0.12);
 }
 
+.brand-mark {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
 .dashboard-card h1 {
   max-width: none;
   margin-bottom: 12px;

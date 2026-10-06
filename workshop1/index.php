@@ -1,41 +1,6 @@
 <?php
-session_start();
-
-if (isset($_SESSION['usuario'])) {
-    header('Location: dashboard.php');
-    exit;
-}
-
-require 'conexion.php';
-
-$error = '';
+$error = isset($_GET['error']) && $_GET['error'] === '1';
 $username = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
-
-    if ($username === '' || $password === '') {
-        $error = 'Completa todos los campos.';
-    } else {
-        $consulta = $conexion->prepare('SELECT id, username, email, password FROM usuarios WHERE username = ? LIMIT 1');
-        $consulta->execute([$username]);
-        $usuario = $consulta->fetch();
-
-        if ($usuario && $password === $usuario['password']) {
-            $_SESSION['usuario'] = [
-                'id' => $usuario['id'],
-                'username' => $usuario['username'],
-                'email' => $usuario['email']
-            ];
-
-            header('Location: dashboard.php');
-            exit;
-        }
-
-        $error = 'El correo o la contraseña no son correctos.';
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>Ingresa tus datos para continuar.</p>
             </div>
 
-            <?php if ($error !== ''): ?>
-                <div class="alert" role="alert"><?= htmlspecialchars($error) ?></div>
+            <?php if ($error): ?>
+                <div class="alert" role="alert">Credenciales inválidas</div>
             <?php endif; ?>
 
-            <form method="post" action="">
+            <form method="post" action="login.php">
                 <label for="username">Nombre de usuario</label>
                 <input type="text" id="username" name="username" value="<?= htmlspecialchars($username) ?>" placeholder="example: joomiiii" required autofocus>
 
