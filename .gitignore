@@ -1,5 +1,9 @@
-# Este repositorio solo contiene el proyecto workshop1.
+# Este repositorio contiene el proyecto workshop1 y la entrega Workshop 2.
 *
 !.gitignore
 !workshop1/
 !workshop1/**
+!Workshop 2/
+!Workshop 2/**
+# Mantener la copia local de XAMPP fuera del repositorio.
+workshop1/Workshop 2/
