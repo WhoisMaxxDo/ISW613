@@ -1,0 +1,6 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^(?:app|config|tests)(?:/|$) - [F,L]
+<FilesMatch "\.sql$">
+    Require all denied
+</FilesMatch>
